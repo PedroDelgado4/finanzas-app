@@ -18,7 +18,7 @@ export const useFinanceStore = defineStore('finance', () => {
     }
 
     // editar una trasnccion
-    const editTransaction = (id, newTransaction) => {
+    const editTransaction = (updatedTransaction) => {
         const index = transactions.value.findIndex(t => t.id === updatedTransaction.id)
         if (index !== -1) {
             transactions.value[index] = updatedTransaction
@@ -46,10 +46,8 @@ export const useFinanceStore = defineStore('finance', () => {
         incomes,
         expenses,
         balance
-    },
+    }
+}, 
     // 4. CONFIGURACIÓN DEL PLUGIN
     // Esta línea hace que todo el array 'transactions' se guarde en localStorage automaticamente
-    { persist: true }
-
-    
-})
+{ persist: true })
