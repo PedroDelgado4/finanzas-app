@@ -6,6 +6,19 @@ export const useFinanceStore = defineStore('finance', () => {
     // 'transactions' es el array principal. Guarda objetos con id, title, amount, type, category, date.
     const transactions = ref([])
 
+    // variabe para saber qué transaccion estamos editando
+    const activeEditItem = ref(null)
+
+    // cargar una transaccion al form
+    const setActiveEditItem = (transaction) => {
+        activeEditItem.value = transaction
+    }
+
+    // limpiar el form
+    const clearActiveEditItem = () => {
+        activeEditItem.value = null
+    }
+
     // 2. ACCIONES (Actions)
     // añadir nueva transaccion
     const addTransaction = (transaction) => {
@@ -40,6 +53,9 @@ export const useFinanceStore = defineStore('finance', () => {
     // retornamos todo lo que exponemos a los componentes
     return {
         transactions,
+        activeEditItem,
+        setActiveEditItem,
+        clearActiveEditItem,
         addTransaction,
         deleteTransaction,
         editTransaction,

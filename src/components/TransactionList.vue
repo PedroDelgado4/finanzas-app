@@ -46,7 +46,10 @@ const confirmDelete = (id) => {
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="font-bold text-brand-green">{{ formatCurrency(item.amount) }}</span>
-                        <button @click="confirmDelete(item.id)" class="text-gray-300 hover:text-red-500 transition-colors">
+                        <button @click="financeStore.setActiveEditItem(item)" class="text-gray-300 hover:text-blue-500 transition-colors" title="Editar">
+                            ✎
+                        </button>
+                        <button @click="confirmDelete(item.id)" class="text-gray-300 hover:text-red-500 transition-colors" title="Eliminar">
                             &times;
                         </button>
                     </div>
@@ -79,9 +82,12 @@ const confirmDelete = (id) => {
                         <p class="text-xs text-gray-400">{{ item.category }}</p>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="font-bold text-red-500">- {{ formatCurrency(item.amount) }}</span>
-                        <button @click="confirmDelete(item.id)" class="text-gray-300 hover:text-red-500 transition-colors">
-                        &times;
+                        <span class="font-bold text-red-500">{{ formatCurrency(item.amount) }}</span>
+                        <button @click="financeStore.setActiveEditItem(item)" class="text-gray-300 hover:text-blue-500 transition-colors" title="Editar">
+                            ✎
+                        </button>
+                        <button @click="confirmDelete(item.id)" class="text-gray-300 hover:text-red-500 transition-colors" title="Eliminar">
+                            &times;
                         </button>
                     </div>
                 </div>
