@@ -53,7 +53,7 @@ const formatCurrency = (value) => {
           <TransactionList />
         </div>
       </main>
-
+      <FloatingProfileButton/>
     </div>
   </div>
 </template>
