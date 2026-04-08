@@ -2,6 +2,10 @@
 // import de store para aaceder a las listas
 import { useFinanceStore } from '../stores/financeStore';
 import TransactionChart from './TransactionChart.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 
 const financeStore = useFinanceStore();
 
@@ -15,7 +19,7 @@ const formatCurrency = (value) => {
 
 // confirmar antes de borar
 const confirmDelete = (id) => {
-    if(confirm('¿Estás seguro/a de que deseas eliminar este movimiento?')) {
+    if (confirm(t('list.confirmDelete'))) {
         financeStore.deleteTransaction(id)
     }
 }
@@ -27,14 +31,14 @@ const confirmDelete = (id) => {
         <div>
             <h4 class="text-brand-green font-bold mb-4 flex items-center gap-2">
                 <span class="w-2 h-2 bg-brand-green rounded-full"></span>
-                Ingresos
+                {{ $t('list.incomes') }}
             </h4>
             
             <div class="mb-6 bg-brand-silver/10 rounded-xl p-4 border border-brand-silver">
                 <TransactionChart 
                     :transactions="financeStore.incomes" 
                     color="#2E8D1B" 
-                    labelName="Ingresos" 
+                    :labelName="$t('list.incomes')" 
                 />
             </div>
 
@@ -42,7 +46,7 @@ const confirmDelete = (id) => {
                 <div v-for="item in financeStore.incomes" :key="item.id" class="bg-white border border-brand-silver rounded-xl p-4 flex justify-between items-center shadow-sm hover:shadow-md transition-shadow">
                     <div>
                         <p class="font-medium text-gray-800">{{ item.title }}</p>
-                        <p class="text-xs text-gray-400">{{ item.category }}</p>
+                        <p class="text-xs text-gray-400">{{ $t(`categories.${item.category}`) }}</p>
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="font-bold text-brand-green">{{ formatCurrency(item.amount) }}</span>
@@ -56,7 +60,7 @@ const confirmDelete = (id) => {
                 </div>
 
                 <p v-if="financeStore.incomes.length === 0" class="text-gray-400 italic text-sm text-center py-4">
-                    No hay ingresos registrados
+                    {{ $t('list.incomes') }}
                 </p>
             </div>
         </div>
@@ -64,14 +68,14 @@ const confirmDelete = (id) => {
         <div>
             <h4 class="text-red-500 font-bold mb-4 flex items-center gap-2">
                 <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-                Gastos
+                {{ $t('list.expenses') }}
             </h4>
 
             <div class="mb-6 bg-brand-silver/10 rounded-xl p-4 border border-brand-silver">
                 <TransactionChart 
                     :transactions="financeStore.expenses" 
                     color="#EF4444" 
-                    labelName="Gastos" 
+                    :labelName="$t('list.expenses')" 
                 />
             </div>
 
@@ -79,7 +83,7 @@ const confirmDelete = (id) => {
                 <div v-for="item in financeStore.expenses" :key="item.id" class="bg-white border border-brand-silver rounded-xl p-4 flex justify-between items-center shadow-sm hover:shadow-md transition-shadow">
                     <div>
                         <p class="font-medium text-gray-800">{{ item.title }}</p>
-                        <p class="text-xs text-gray-400">{{ item.category }}</p>
+                        <p class="text-xs text-gray-400">{{ $t(`categories.${item.category}`) }}</p>
                     </div>
                     <div class="flex items-center gap-4">
                         <span class="font-bold text-red-500">{{ formatCurrency(item.amount) }}</span>
@@ -92,7 +96,7 @@ const confirmDelete = (id) => {
                     </div>
                 </div>
                 <p v-if="financeStore.expenses.length === 0" class="text-gray-400 italic text-sm text-center py-4">
-                    No hay gastos registrados
+                    {{ $t('list.expenses') }}
                 </p>   
             </div>
         </div>
