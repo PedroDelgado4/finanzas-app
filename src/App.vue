@@ -2,6 +2,7 @@
 
 import { useFinanceStore } from './stores/financeStore';
 import TransactionForm from './components/TransactionForm.vue';
+import TransactionList from './components/TransactionList.vue';
 const financeStore = useFinanceStore();
 
 </script>
@@ -25,7 +26,7 @@ const financeStore = useFinanceStore();
         </div>
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6 border border-brand-silver">
           <h3 class="font-bold text-gray-700 mb-4">Últimos movimientos</h3>
-          <p class="text-gray-400 italic text-sm">Aquí va la lista de movimientos y graficas</p>
+          <TransactionList/>
         </div>
       </main>
     </div>
